@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
@@ -27,7 +27,9 @@ class Pedido(PedidoBase, table=True):
     cliente_id: int = Field(foreign_key="clientes.id", ondelete="CASCADE")
     cliente: "Cliente" = Relationship(back_populates="pedidos")  # <-- AJUSTADO
 
-    data_hora: datetime = Field(default_factory=datetime.utcnow)
+    data_hora: datetime = Field(
+    default_factory=lambda: datetime.now(timezone.utc)
+)
     status: StatusPedido = Field(default=StatusPedido.CRIADO)
 
     # 1:N → Itens do pedido (composição)
