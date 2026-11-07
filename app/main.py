@@ -71,7 +71,7 @@ async def ciclo_de_vida(app: FastAPI):
             sessao.commit()
 
         # Seed automático de clientes didáticos para demonstração
-        """clientes_existentes = sessao.exec(select(Cliente)).first()
+        clientes_existentes = sessao.exec(select(Cliente)).first()
         if not clientes_existentes:
             clientes_iniciais = [
                 Cliente(
@@ -92,7 +92,7 @@ async def ciclo_de_vida(app: FastAPI):
                 ),
             ]
             sessao.add_all(clientes_iniciais)
-            sessao.commit()"""
+            sessao.commit()
 
         # Seed automático de pedido didático com item para demonstração imediata
         pedidos_existentes = sessao.exec(select(Pedido)).first()
